@@ -2,7 +2,6 @@ package matchers
 
 import (
 	"flag"
-	"fmt"
 	"strings"
 )
 
@@ -18,7 +17,7 @@ type rule struct {
 
 type Matcher interface {
 	Match(string) bool
-	fmt.Stringer
+	String() string
 }
 
 type MatcherFunc func(input string) (Matcher, error)
