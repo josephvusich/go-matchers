@@ -38,6 +38,26 @@ func TestGlobRuleSet(t *testing.T) {
 	checkCases(assert, gs)
 }
 
+func TestExample(t *testing.T) {
+	assert := require.New(t)
+
+	ruleset := matchers.RuleSet{
+		// Default behavior of empty RuleSet
+		DefaultInclude: true,
+	}
+
+	include, exclude := ruleset.FlagValues(NewMatcher)
+
+	fs := flag.NewFlagSet("test", flag.ExitOnError)
+	fs.Var(include, "include", "include matching files")
+	fs.Var(exclude, "exclude", "exclude matching files")
+
+	fs.Parse([]string{`--exclude`, `*.bar`, `--include`, `foo.bar`})
+
+	assert.True(ruleset.Includes("foo.bar"))   // true
+	assert.False(ruleset.Includes("fizz.bar")) // false
+}
+
 func TestGlobFlagValues(t *testing.T) {
 	assert := require.New(t)
 
