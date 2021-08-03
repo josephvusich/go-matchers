@@ -1,5 +1,7 @@
 # go-matchers
 
+![build status](https://github.com/josephvusich/go-matchers/actions/workflows/go.yml/badge.svg?branch=main)
+
 Ruleset helper for ordered include/exclude logic, with builtin support for the stdlib [flag](https://pkg.go.dev/flag) package. Used by [fdf](https://github.com/josephvusich/fdf).
 
 # Usage
