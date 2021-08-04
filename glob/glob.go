@@ -10,6 +10,10 @@ type glob struct {
 }
 
 func NewMatcher(pattern string) (r matchers.Matcher, err error) {
+	if _, err = zglob.New(pattern); err != nil {
+		return nil, err
+	}
+
 	return &glob{
 		pattern: pattern,
 	}, nil
