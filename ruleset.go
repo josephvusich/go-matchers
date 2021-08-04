@@ -2,6 +2,7 @@ package matchers
 
 import (
 	"flag"
+	"fmt"
 	"strings"
 )
 
@@ -61,10 +62,18 @@ func (s *RuleSet) FlagValues(f MatcherFunc) (include, exclude flag.Value) {
 		}
 }
 
+func ruleString(b bool) string {
+	if b {
+		return "include"
+	}
+	return "exclude"
+}
+
 func (s *RuleSet) String() string {
-	elems := make([]string, 0, len(s.rules))
+	elems := make([]string, 1, len(s.rules)+1)
+	elems[0] = fmt.Sprintf("default: %s", ruleString(s.DefaultInclude))
 	for _, r := range s.rules {
-		elems = append(elems, r.String())
+		elems = append(elems, fmt.Sprintf("%s: %s", ruleString(r.include), r.Matcher.String()))
 	}
 	return strings.Join(elems, "\n")
 }

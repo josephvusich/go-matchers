@@ -20,7 +20,7 @@ func TestGlobSetString(t *testing.T) {
 	assert.NoError(err)
 	gs.Add(g, false)
 
-	assert.Equal("a/**/*\na/**/bar", gs.String())
+	assert.Equal("default: exclude\ninclude: a/**/*\nexclude: a/**/bar", gs.String())
 }
 
 func TestGlobRuleSet(t *testing.T) {
